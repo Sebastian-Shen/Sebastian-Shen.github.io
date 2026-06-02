@@ -962,7 +962,7 @@
           <h3>水質管理培訓</h3>
           <p>為當地養殖戶設計簡易水質監測課程，協助漁民理解水體變化並應用於日常養殖管理。</p>
           <div class="project-tags"><span>Water Quality</span><span>Training</span></div>
-          <a class="github-link" href="file:///C:/Users/Sean/Desktop/%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%E8%AA%B2%E7%A8%8B%20%E9%A4%8A%E9%AD%9A%E7%9F%A5%E8%AD%98%E5%8F%8A%E5%BB%BA%E8%AD%B0%20Minga%20guazu.pdf" target="_blank" rel="noreferrer">查看活動 <span>↗</span></a>
+          <a class="github-link" href="./assets/documents/water-quality-training.pdf" target="_blank" rel="noreferrer">查看文件 <span>↗</span></a>
         </div>
       </article>
 
@@ -998,119 +998,107 @@
     </section>
 
     <section class="section-label reveal" id="ai-learning">
-      <h2>AI 與生物影像辨識</h2>
-      <span>本學期人工智慧與生物影像辨識課程筆記，整理成可放在作品集中的模組說明。</span>
+      <h2>學習進度</h2>
+      <span>持續學習的路上，紀錄技術、永續管理與國際視野。</span>
     </section>
 
-    <section class="learning-grid">
-      <article class="project-card reveal">
+    <section class="learning-grid reveal">
+      <article class="project-card">
         <div class="card-content">
-          <span class="project-number">AI 01</span>
-          <h3>OpenCV URL 影像讀取與格式處理</h3>
-          <p>學習用 OpenCV、NumPy 與 URL 資料流讀取網路圖片，將影像解碼成陣列後進行亮度調整與顯示，理解影像其實可被視為可計算的像素矩陣。</p>
-          <div class="project-tags"><span>OpenCV</span><span>NumPy</span><span>Photo Format</span></div>
-          <a class="github-link" href="https://github.com/LBK888/ComVis/blob/main/ComVis_offline/ComVis_ch01_photoformat.ipynb" target="_blank" rel="noreferrer">課程模組 <span>↗</span></a>
+          <h3>水產科技整合</h3>
+          <p>探索物聯網、資料分析在養殖場的應用，以科技最佳化水質、飼料與產出管理。</p>
+          <div class="project-tags"><span>IoT</span><span>Data</span></div>
         </div>
       </article>
 
-      <article class="project-card reveal">
+      <article class="project-card">
         <div class="card-content">
-          <span class="project-number">AI 02</span>
-          <h3>Teachable Machine 動物辨識模型</h3>
-          <p>透過 Google Teachable Machine 訓練影像分類模型，再用 Keras 載入模型與標籤，將圖片縮放到 224x224、標準化後推論類別與信心分數，並用多次測試估算準確率。</p>
-          <div class="project-tags"><span>Teachable Machine</span><span>Keras</span><span>影像分類</span></div>
-          <a class="github-link" href="https://github.com/LBK888/ComVis/blob/main/ComVis_offline/ComVis_ch05_teachable_machine.ipynb" target="_blank" rel="noreferrer">Teachable Machine <span>↗</span></a>
+          <h3>碳足跡評估</h3>
+          <p>深化 ISO 14064-1 認知，學習全生命週期評估方法，協助農場盤查與減碳決策。</p>
+          <div class="project-tags"><span>LCA</span><span>Carbon</span></div>
         </div>
       </article>
     </section>
+
+    <button class="orbit-control" type="button" aria-label="回到頂端">☍</button>
   </main>
 
-  <button class="orbit-control" type="button" aria-label="回到頁面頂端"></button>
-
   <script>
-    const root = document.documentElement;
-    const hub = document.querySelector(".profile-hub");
-    const avatarButton = document.querySelector(".avatar-button");
-    const avatarImage = document.querySelector("#avatarImage");
-    const menuButton = document.querySelector(".menu-dot");
-    const orbitButton = document.querySelector(".orbit-control");
-    const heroImage = document.querySelector(".hero-image");
-    const cards = document.querySelectorAll(".project-card");
-    const seaCreatures = document.querySelectorAll(".sea-creature");
+    const avatarButton = document.querySelector('.avatar-button');
+    const profileHub = document.querySelector('.profile-hub');
+    const bioNodes = document.querySelectorAll('.bio-node');
+    const orbitControl = document.querySelector('.orbit-control');
+    const menuDot = document.querySelector('.menu-dot');
+    const sparks = document.querySelectorAll('.spark');
+    const cursorGlow = document.querySelector('.cursor-glow');
 
-    function toggleProfile() {
-      const isOpen = hub.classList.toggle("is-open");
-      avatarButton.setAttribute("aria-expanded", String(isOpen));
-    }
+    // Avatar toggle
+    avatarButton.addEventListener('click', () => {
+      profileHub.classList.toggle('is-open');
+      avatarButton.setAttribute('aria-expanded', profileHub.classList.contains('is-open'));
+    });
 
-    avatarButton.addEventListener("click", toggleProfile);
-    menuButton.addEventListener("click", toggleProfile);
+    menuDot.addEventListener('click', () => {
+      profileHub.classList.toggle('is-open');
+      avatarButton.setAttribute('aria-expanded', profileHub.classList.contains('is-open'));
+    });
 
-    window.addEventListener("pointermove", (event) => {
-      root.style.setProperty("--x", `${event.clientX}px`);
-      root.style.setProperty("--y", `${event.clientY}px`);
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!profileHub.contains(e.target) && !menuDot.contains(e.target)) {
+        profileHub.classList.remove('is-open');
+        avatarButton.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-      seaCreatures.forEach((creature, index) => {
-        const rect = creature.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const dx = centerX - event.clientX;
-        const dy = centerY - event.clientY;
+    // Orbit control scroll to top
+    orbitControl.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Cursor glow tracking
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.setProperty('--x', e.clientX + 'px');
+      cursorGlow.style.setProperty('--y', e.clientY + 'px');
+    });
+
+    // Spark flee on cursor approach
+    const sparksArray = Array.from(sparks);
+    document.addEventListener('mousemove', (e) => {
+      sparksArray.forEach(spark => {
+        const rect = spark.getBoundingClientRect();
+        const sparkX = rect.left + rect.width / 2;
+        const sparkY = rect.top + rect.height / 2;
+        const dx = sparkX - e.clientX;
+        const dy = sparkY - e.clientY;
         const distance = Math.hypot(dx, dy);
-        const safeZone = 165;
 
-        if (distance < safeZone) {
-          const force = (safeZone - distance) / safeZone;
+        if (distance < 150) {
+          spark.classList.add('is-fleeing');
           const angle = Math.atan2(dy, dx);
-          const moveX = Math.cos(angle) * force * 120;
-          const moveY = Math.sin(angle) * force * 92;
-          creature.style.setProperty("--repel-x", `${moveX}px`);
-          creature.style.setProperty("--repel-y", `${moveY}px`);
-          creature.style.setProperty("--flee-rotate", `${index % 2 ? -18 : 18}deg`);
-          creature.classList.add("is-fleeing");
+          const repelDistance = 50;
+          spark.style.setProperty('--repel-x', Math.cos(angle) * repelDistance + 'px');
+          spark.style.setProperty('--repel-y', Math.sin(angle) * repelDistance + 'px');
+          spark.style.setProperty('--flee-rotate', (angle * 180 / Math.PI) + 'deg');
         } else {
-          creature.style.setProperty("--repel-x", "0px");
-          creature.style.setProperty("--repel-y", "0px");
-          creature.classList.remove("is-fleeing");
+          spark.classList.remove('is-fleeing');
+          spark.style.setProperty('--repel-x', '0px');
+          spark.style.setProperty('--repel-y', '0px');
         }
       });
     });
 
-    window.addEventListener("scroll", () => {
-      const offset = window.scrollY * 0.12;
-      heroImage.style.backgroundPosition = `center calc(42% + ${offset}px)`;
-    }, { passive: true });
-
-    orbitButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      if (!hub.classList.contains("is-open")) toggleProfile();
-    });
-
-    cards.forEach((card) => {
-      card.addEventListener("pointermove", (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const rotateY = ((x / rect.width) - 0.5) * 10;
-        const rotateX = ((0.5 - y / rect.height)) * 10;
-        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-      });
-
-      card.addEventListener("pointerleave", () => {
-        card.style.transform = "";
-      });
-    });
-
+    // Intersection Observer for reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          observer.unobserve(entry.target);
+          entry.target.classList.add('in-view');
         }
       });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    revealElements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
